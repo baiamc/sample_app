@@ -8,9 +8,6 @@ gem 'rails', '3.2.9'
 group :development, :test do 
   gem 'sqlite3'
   gem 'rspec-rails'
-end
-
-group :test do
   gem 'capybara'
 end
 
