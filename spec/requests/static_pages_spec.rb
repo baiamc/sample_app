@@ -1,58 +1,37 @@
 require 'spec_helper'
 
 describe "Static Pages" do
-
-  let(:base_title) {'Ruby on Rails Tutorial Sample App'}
+  subject { page }
+  shared_examples_for "all static pages" do
+    it { should have_selector 'h1', text: heading }
+    it { page_title.should eq full_title(title_piece) }
+  end
 
   describe "Home Page" do
-    
-    it "has the content 'Sample App'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', text: 'Sample App')
-    end
-
-    it "has the title 'Home'" do
-      visit '/static_pages/home'
-      find('title').native.text.should eq "#{base_title}"
-    end
+    before { visit root_path }
+    let(:heading) { 'Sample App' }
+    let(:title_piece) { '' }
+    it_should_behave_like "all static pages"
   end
 
   describe "Help Page" do
-
-    it "has the content 'Help'" do
-      visit '/static_pages/help'
-      page.should have_selector('h1', text: 'Help')
-    end
-
-    it "has the title 'Help'" do
-      visit '/static_pages/help'
-      find('title').native.text.should eq "#{base_title} | Help"
-    end
+    before { visit help_path }
+    let(:heading) { 'Help' }
+    let(:title_piece) { 'Help' }
+    it_should_behave_like "all static pages"
   end
 
   describe "About Page" do
-
-    it "has the content 'About Us'" do
-      visit '/static_pages/about'
-      page.should have_selector('h1', text: 'About Us')
-    end
-
-    it "has the title 'About Us'" do
-      visit '/static_pages/about'
-      find('title').native.text.should eq "#{base_title} | About Us"
-    end
+    before { visit about_path }
+    let(:heading) { 'About Us' }
+    let(:title_piece) { 'About Us' }
+    it_should_behave_like "all static pages"
   end
 
   describe "Contact Page" do
-
-    it "has the content 'Contact'" do
-      visit '/static_pages/contact'
-      page.should have_selector 'h1', text: 'Contact'
-    end
-
-    it "has the title 'Contact'" do
-      visit '/static_pages/contact'
-      find('title').native.text.should eq "#{base_title} | Contact"
-    end
-  end
+    before { visit contact_path }
+    let(:heading) { 'Contact' }
+    let(:title_piece) { 'Contact' }
+    it_should_behave_like "all static pages"
+  end 
 end
