@@ -4,7 +4,7 @@ describe "Static Pages" do
   subject { page }
   shared_examples_for "all static pages" do
     it { should have_selector 'h1', text: heading }
-    it { page_title.should eq full_title(title_piece) }
+    specify { page_title.should eq full_title(title_piece) }
   end
 
   describe "Home Page" do
