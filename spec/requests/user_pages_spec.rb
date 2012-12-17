@@ -8,7 +8,7 @@ describe "UserPages" do
     before { visit user_path(user) }
 
     it { should have_selector('h1',    text: user.name) }
-    specify { page_title.should include user.name }
+    its(:page_title) { should include user.name }
   end
 
   describe "signup" do
@@ -18,7 +18,7 @@ describe "UserPages" do
     let(:submit) { "Create my account" }
 
     it { should have_selector('h1',    text: "Sign up") }
-    specify { page_title.should include "Sign up" }
+    its(:page_title) { should include "Sign up" }
 
     describe "with invalid information" do
       it "should not create a user" do
@@ -50,6 +50,7 @@ describe "UserPages" do
         before { click_button submit }
         it { should have_selector '.alert-success', 'Welcome to the Sample App!' }
         specify { current_path.should == user_path(User.count) }
+        it { should have_link 'Sign out', href: signout_path }
       end
     end
   end
